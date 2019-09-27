@@ -1,10 +1,11 @@
-//
-//  ViewController.swift
-//  calculator
-//
-//  Created by Simran on 2019-09-24.
-//  Copyright © 2019 centennialcollege. All rights reserved.
-//
+/*
+ * AppDelegate.swift
+ * Project: Calculator
+ * Name: Simranjeet Singh Dhillon
+ * StudentID: 301093914
+ * Version: V1
+ */
+
 
 import UIKit
 
