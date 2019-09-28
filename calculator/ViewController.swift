@@ -3,7 +3,7 @@
  * Project: Calculator
  * Name: Simranjeet Singh Dhillon
  * StudentID: 301093914
- * Version: V4 - Login for C button created
+ * Version: V4 - Logic for C button created
  */
 
 
