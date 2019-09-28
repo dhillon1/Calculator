@@ -3,15 +3,18 @@
  * Project: Calculator
  * Name: Simranjeet Singh Dhillon
  * StudentID: 301093914
- * Version: V2 - Connection made
+ * Version: V3 - Logic for CE butoon
  */
 
 
 import UIKit
 
 class ViewController: UIViewController {
+    
     @IBOutlet weak var labelUp: UILabel!
     @IBOutlet weak var labelDown: UILabel!
+    private var m_operand = "0"
+    private var m_operator = ""
     
     
     
@@ -19,9 +22,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        labelUp.text = "9"
-        labelDown.text = "+"
-        
+        labelUp.text = ""
+        labelDown.text = "0"
         
     }
     
@@ -31,7 +33,48 @@ class ViewController: UIViewController {
 
 
   
-    @IBAction func buttonAction(_ sender: UIButton) {
+    @IBAction func keys(_ sender: UIButton) {
+        var calculatorButton = sender.titleLabel?.text
+        
+        switch (calculatorButton) {
+        case ".":
+            if(m_operand == "0"){
+            
+            }
+            break
+        case "+":
+            break
+        case"=":
+            break
+        case "-":
+            break
+        case "×":
+            break
+        case "÷":
+            break
+        case "%":
+            break
+        case"C":
+            break
+        case"CE":
+            m_operand = "0"
+            labelDown.text = "0"
+            labelUp.text = ""
+            break
+        case"+/-":
+            break
+        default:
+            if(m_operand == "0"){
+                m_operand = calculatorButton!
+            }
+            else{
+                m_operand += calculatorButton! }
+            labelDown.text  = m_operand
+            
+            
+        }
+        
+        
         
         
         
