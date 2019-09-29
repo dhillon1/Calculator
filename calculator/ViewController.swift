@@ -3,7 +3,7 @@
  * Project: Calculator
  * Name: Simranjeet Singh Dhillon
  * StudentID: 301093914
- * Version: V6 - Logic for -,×,÷ and % button created
+ * Version: V7 - Logic for +/- button is creating problem
  */
 
 
@@ -86,15 +86,10 @@ class ViewController: UIViewController {
                     labelDown.text = ""
                     break
                 case "÷":
-                    if(m_operand1.contains(".") || m_operand2.contains(".")){
-                        var a = Double (m_operand1)!
-                        var b = Double (m_operand2)!
-                        labelUp.text = String(b / a)
-                    }else{
-                        var a = Int64 (m_operand1)!
-                        var b = Int64 (m_operand2)!
-                        labelUp.text = String(b / a)
-                    }
+                    var a = Double (m_operand1)!
+                    var b = Double (m_operand2)!
+                    labelUp.text = String(format: "%.2f",b / a)
+                
                     m_operand2 = labelUp.text!
                     m_operand1 = "0"
                     labelDown.text = ""
@@ -103,7 +98,7 @@ class ViewController: UIViewController {
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
-                        labelUp.text = String(format: "%.1f", (b.truncatingRemainder(dividingBy:a)))
+                        labelUp.text = String(format: "%.2f", (b.truncatingRemainder(dividingBy:a)))
                     }else{
                         var a = Int64 (m_operand1)!
                         var b = Int64 (m_operand2)!
@@ -118,7 +113,6 @@ class ViewController: UIViewController {
                     m_operand2 = labelUp.text!
                     m_operand1 = "0"
                     labelDown.text = ""
-                    labelMid.text = "+"
                     }
                 m_operator = "+"
                 labelMid.text = "+"
@@ -126,6 +120,67 @@ class ViewController: UIViewController {
             
             
         case"=":
+            switch (m_operator){
+            case "+":
+                if(m_operand1.contains(".") || m_operand2.contains(".")){
+                    var a = Double (m_operand1)!
+                    var b = Double (m_operand2)!
+                    labelDown.text = String(a + b)
+                }else{
+                    var a = Int64 (m_operand1)!
+                    var b = Int64 (m_operand2)!
+                    labelDown.text = String(a + b)
+                }
+                break
+                
+            case "-":
+                if(m_operand1.contains(".") || m_operand2.contains(".")){
+                    var a = Double (m_operand1)!
+                    var b = Double (m_operand2)!
+                    labelDown.text = String(b - a)
+                }else{
+                    var a = Int64 (m_operand1)!
+                    var b = Int64 (m_operand2)!
+                    labelDown.text = String(b - a)
+                }
+                
+                break
+            case "×":
+                if(m_operand1.contains(".") || m_operand2.contains(".")){
+                    var a = Double (m_operand1)!
+                    var b = Double (m_operand2)!
+                    labelDown.text = String(b * a)
+                    print(b + a)
+                }else{
+                    var a = Int64 (m_operand1)!
+                    var b = Int64 (m_operand2)!
+                    labelDown.text = String(b * a)
+                }
+                break
+            case "÷":
+                var a = Double (m_operand1)!
+                var b = Double (m_operand2)!
+                labelDown.text = String(format: "%.2f",b / a)
+                break
+            case "%":
+                if(m_operand1.contains(".") || m_operand2.contains(".")){
+                    var a = Double (m_operand1)!
+                    var b = Double (m_operand2)!
+                    labelDown.text = String(format: "%.1f", (b.truncatingRemainder(dividingBy:a)))
+                }else{
+                    var a = Int64 (m_operand1)!
+                    var b = Int64 (m_operand2)!
+                    labelDown.text = String(b % a)
+                }
+                break
+            default:
+                break
+            }
+            m_operator = ""
+            labelMid.text = ""
+            labelUp.text = ""
+            m_operand2 = "0"
+            m_operand1 = labelDown.text!
             break
             
             
@@ -176,15 +231,9 @@ class ViewController: UIViewController {
                 labelDown.text = ""
                 break
             case "÷":
-                if(m_operand1.contains(".") || m_operand2.contains(".")){
-                    var a = Double (m_operand1)!
-                    var b = Double (m_operand2)!
-                    labelUp.text = String(b / a)
-                }else{
-                    var a = Int64 (m_operand1)!
-                    var b = Int64 (m_operand2)!
-                    labelUp.text = String(b / a)
-                }
+                var a = Double (m_operand1)!
+                var b = Double (m_operand2)!
+                labelUp.text = String(format: "%.2f",b / a)
                 m_operand2 = labelUp.text!
                 m_operand1 = "0"
                 labelDown.text = ""
@@ -193,7 +242,7 @@ class ViewController: UIViewController {
                 if(m_operand1.contains(".") || m_operand2.contains(".")){
                     var a = Double (m_operand1)!
                     var b = Double (m_operand2)!
-                    labelUp.text = String(format: "%.1f", (b.truncatingRemainder(dividingBy:a)))
+                    labelUp.text = String(format: "%.2f", (b.truncatingRemainder(dividingBy:a)))
                 }else{
                     var a = Int64 (m_operand1)!
                     var b = Int64 (m_operand2)!
@@ -208,7 +257,6 @@ class ViewController: UIViewController {
                 m_operand2 = labelUp.text!
                 m_operand1 = "0"
                 labelDown.text = ""
-                labelMid.text = "+"
             }
             m_operator = "-"
             labelMid.text = "-"
@@ -247,7 +295,7 @@ class ViewController: UIViewController {
                 if(m_operand1.contains(".") || m_operand2.contains(".")){
                     var a = Double (m_operand1)!
                     var b = Double (m_operand2)!
-                    labelUp.text = String(b - a)
+                    labelUp.text = String(format: "%.2f",b - a)
                 }else{
                     var a = Int64 (m_operand1)!
                     var b = Int64 (m_operand2)!
@@ -272,15 +320,9 @@ class ViewController: UIViewController {
                 labelDown.text = ""
                 break
             case "÷":
-                if(m_operand1.contains(".") || m_operand2.contains(".")){
-                    var a = Double (m_operand1)!
-                    var b = Double (m_operand2)!
-                    labelUp.text = String(b / a)
-                }else{
-                    var a = Int64 (m_operand1)!
-                    var b = Int64 (m_operand2)!
-                    labelUp.text = String(b / a)
-                }
+                var a = Double (m_operand1)!
+                var b = Double (m_operand2)!
+                labelUp.text = String(format: "%.2f",b / a)
                 m_operand2 = labelUp.text!
                 m_operand1 = "0"
                 labelDown.text = ""
@@ -289,7 +331,7 @@ class ViewController: UIViewController {
                 if(m_operand1.contains(".") || m_operand2.contains(".")){
                     var a = Double (m_operand1)!
                     var b = Double (m_operand2)!
-                    labelUp.text = String(format: "%.1f", (b.truncatingRemainder(dividingBy:a)))
+                    labelUp.text = String(format: "%.2f", (b.truncatingRemainder(dividingBy:a)))
                 }else{
                     var a = Int64 (m_operand1)!
                     var b = Int64 (m_operand2)!
@@ -304,7 +346,6 @@ class ViewController: UIViewController {
                 m_operand2 = labelUp.text!
                 m_operand1 = "0"
                 labelDown.text = ""
-                labelMid.text = "+"
             }
             m_operator = "×"
             labelMid.text = "×"
@@ -365,15 +406,9 @@ class ViewController: UIViewController {
                 labelDown.text = ""
                 break
             case "÷":
-                if(m_operand1.contains(".") || m_operand2.contains(".")){
-                    var a = Double (m_operand1)!
-                    var b = Double (m_operand2)!
-                    labelUp.text = String(b / a)
-                }else{
-                    var a = Int64 (m_operand1)!
-                    var b = Int64 (m_operand2)!
-                    labelUp.text = String(b / a)
-                }
+                var a = Double (m_operand1)!
+                var b = Double (m_operand2)!
+                labelUp.text = String(format: "%.2f",b / a)
                 m_operand2 = labelUp.text!
                 m_operand1 = "0"
                 labelDown.text = ""
@@ -382,7 +417,7 @@ class ViewController: UIViewController {
                 if(m_operand1.contains(".") || m_operand2.contains(".")){
                     var a = Double (m_operand1)!
                     var b = Double (m_operand2)!
-                    labelUp.text = String(format: "%.1f", (b.truncatingRemainder(dividingBy:a)))
+                    labelUp.text = String(format: "%.2f", (b.truncatingRemainder(dividingBy:a)))
                 }else{
                     var a = Int64 (m_operand1)!
                     var b = Int64 (m_operand2)!
@@ -397,7 +432,6 @@ class ViewController: UIViewController {
                 m_operand2 = labelUp.text!
                 m_operand1 = "0"
                 labelDown.text = ""
-                labelMid.text = "+"
             }
             m_operator = "÷"
             labelMid.text = "÷"
@@ -452,15 +486,9 @@ class ViewController: UIViewController {
                 labelDown.text = ""
                 break
             case "÷":
-                if(m_operand1.contains(".") || m_operand2.contains(".")){
-                    var a = Double (m_operand1)!
-                    var b = Double (m_operand2)!
-                    labelUp.text = String(b / a)
-                }else{
-                    var a = Int64 (m_operand1)!
-                    var b = Int64 (m_operand2)!
-                    labelUp.text = String(b / a)
-                }
+                var a = Double (m_operand1)!
+                var b = Double (m_operand2)!
+                labelUp.text = String(format: "%.2f",b / a)
                 m_operand2 = labelUp.text!
                 m_operand1 = "0"
                 labelDown.text = ""
@@ -469,7 +497,7 @@ class ViewController: UIViewController {
                 if(m_operand1.contains(".") || m_operand2.contains(".")){
                     var a = Double (m_operand1)!
                     var b = Double (m_operand2)!
-                    labelUp.text = String(format: "%.1f", (b.truncatingRemainder(dividingBy:a)))
+                    labelUp.text = String(format: "%.2f", (b.truncatingRemainder(dividingBy:a)))
                 }else{
                     var a = Int64 (m_operand1)!
                     var b = Int64 (m_operand2)!
@@ -484,7 +512,6 @@ class ViewController: UIViewController {
                 m_operand2 = labelUp.text!
                 m_operand1 = "0"
                 labelDown.text = ""
-                labelMid.text = "+"
             }
             m_operator = "%"
             labelMid.text = "%"
@@ -492,15 +519,12 @@ class ViewController: UIViewController {
             break
             
             
-            
-            
-            
-            
         case"C":
             m_operand1 = String (m_operand1.dropLast())
             if(m_operand1.count == 0){
                 if(labelUp.text!.count>0){
                     labelDown.text = ""
+                    m_operand1 = "0"
                     return
                 }
                 else{
@@ -520,7 +544,21 @@ class ViewController: UIViewController {
             break
             
         case"+/-":
+            if(m_operand1 != "0" ){
+                if(m_operand1.contains("-")){
+                    m_operand1 = String(m_operand1.dropFirst())
+                    labelDown.text = m_operand1
+                    return
+                }
+            m_operand1 = "-\(m_operand1)"
+            labelDown.text = m_operand1
+            }
+            
             break
+            
+            
+            
+            
             
         default:
             if(m_operand1 == "0"){
