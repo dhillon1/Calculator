@@ -3,7 +3,7 @@
  * Project: Calculator
  * Name: Simranjeet Singh Dhillon
  * StudentID: 301093914
- * Version: V8 - Issue resolved for all the operator buttons
+ * Version: V8 - Issue resolved for C button
  */
 
 
@@ -558,16 +558,32 @@ class ViewController: UIViewController {
 
 
         case"C":
-            m_operand1 = String (m_operand1.dropLast())
-            if(m_operand1.count == 0){
-                if(labelUp.text!.count>0){
-                    labelDown.text = ""
-                    m_operand1 = "0"
+            if(labelDown.text!.contains("-")){
+                m_operand1 = String (m_operand1.dropLast())
+                if(m_operand1.count == 1){
+                    if(labelUp.text!.count>0){
+                        labelDown.text = ""
+                        m_operand1 = "0"
+                        return
+                    }
+                    else{
+                        m_operand1 = "0"
+                    }
                 }
-                else{
-                    m_operand1 = "0"
-                    labelDown.text = m_operand1
+                labelDown.text = m_operand1
+            }else{
+                m_operand1 = String (m_operand1.dropLast())
+                if(m_operand1.count == 0){
+                    if(labelUp.text!.count>0){
+                        labelDown.text = ""
+                        m_operand1 = "0"
+                        return
+                    }
+                    else{
+                        m_operand1 = "0"
+                    }
                 }
+                labelDown.text = m_operand1
             }
             break
 
