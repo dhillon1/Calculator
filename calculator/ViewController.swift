@@ -3,7 +3,7 @@
  * Project: Calculator
  * Name: Simranjeet Singh Dhillon
  * StudentID: 301093914
- * Version: V9 - Issue resolved in rounding off value
+ * Version: V10 - Icon and Launcher screen updated
  */
 
 
