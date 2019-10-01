@@ -3,7 +3,7 @@
  * Project: Calculator
  * Name: Simranjeet Singh Dhillon
  * StudentID: 301093914
- * Version: V8 - Issue resolved for C button
+ * Version: V9 - Issue resolved in rounding off value
  */
 
 
@@ -43,15 +43,20 @@ class ViewController: UIViewController {
             break
             
             
-            
         case "+":
+            
             if(labelDown.text != ""){
+                var point = LabelDownPoint(label: m_operand1)
+                if(point == 0){
+                    m_operand1 = String(m_operand1.dropLast())
+                }
                 switch (m_operator){
                 case "+":
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
-                        labelUp.text = String(a + b)
+                        labelUp.text = String(format: "%.\(position)f",a + b)
                     }else{
                         var a = Int64 (m_operand1)!
                         var b = Int64 (m_operand2)!
@@ -63,9 +68,10 @@ class ViewController: UIViewController {
                     break
                 case "-":
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
-                        labelUp.text = String(format: "%.2f",b - a)
+                        labelUp.text = String(format: "%.\(position)f",b - a)
                     }else{
                         var a = Int64 (m_operand1)!
                         var b = Int64 (m_operand2)!
@@ -77,9 +83,10 @@ class ViewController: UIViewController {
                     break
                 case "×":
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        var position = DotPositionForMutiply(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
-                        labelUp.text = String(b * a)
+                        labelUp.text = String(format: "%.\(position)f",a * b)
                     }else{
                         var a = Int64 (m_operand1)!
                         var b = Int64 (m_operand2)!
@@ -90,6 +97,7 @@ class ViewController: UIViewController {
                     labelDown.text = ""
                     break
                 case "÷":
+                    var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                     var a = Double (m_operand1)!
                     var b = Double (m_operand2)!
                     labelUp.text = String(format: "%.2f",b / a)
@@ -99,6 +107,7 @@ class ViewController: UIViewController {
                     break
                 case "%":
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
                         labelUp.text = String(format: "%.2f", (b.truncatingRemainder(dividingBy:a)))
@@ -123,24 +132,23 @@ class ViewController: UIViewController {
             break
             
             
-            
-            
-            
-            
             //Equals
-            
-            
-            
             
             
         case"=":
             if(labelDown.text != ""){
+                var point = LabelDownPoint(label: m_operand1)
+                if(point == 0){
+                    m_operand1 = String(m_operand1.dropLast())
+                    labelDown.text = m_operand1
+                }
                 switch (m_operator){
                 case "+":
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
-                        labelDown.text = String(a + b)
+                        labelDown.text = String(format: "%.\(position)f",a + b)
                     }else{
                         var a = Int64 (m_operand1)!
                         var b = Int64 (m_operand2)!
@@ -150,9 +158,10 @@ class ViewController: UIViewController {
                     
                 case "-":
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
-                        labelDown.text = String(b - a)
+                        labelDown.text = String(format: "%.\(position)f",b - a)
                     }else{
                         var a = Int64 (m_operand1)!
                         var b = Int64 (m_operand2)!
@@ -162,10 +171,10 @@ class ViewController: UIViewController {
                     break
                 case "×":
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        var position = DotPositionForMutiply(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
-                        labelDown.text = String(b * a)
-                        print(b + a)
+                        labelDown.text = String(format: "%.\(position)f",b * a)
                     }else{
                         var a = Int64 (m_operand1)!
                         var b = Int64 (m_operand2)!
@@ -173,15 +182,17 @@ class ViewController: UIViewController {
                     }
                     break
                 case "÷":
+                    var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                     var a = Double (m_operand1)!
                     var b = Double (m_operand2)!
                     labelDown.text = String(format: "%.2f",b / a)
                     break
                 case "%":
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
-                        labelDown.text = String(format: "%.1f", (b.truncatingRemainder(dividingBy:a)))
+                        labelDown.text = String(format: "%.2f", (b.truncatingRemainder(dividingBy:a)))
                     }else{
                         var a = Int64 (m_operand1)!
                         var b = Int64 (m_operand2)!
@@ -211,16 +222,19 @@ class ViewController: UIViewController {
             // Subtraction
 
 
-
-
         case "-":
             if(labelDown.text != ""){
+                var point = LabelDownPoint(label: m_operand1)
+                if(point == 0){
+                    m_operand1 = String(m_operand1.dropLast())
+                }
                 switch (m_operator){
                 case "+":
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
-                        labelUp.text = String(a + b)
+                        labelUp.text = String(format: "%.\(position)f",a + b)
                     }else{
                         var a = Int64 (m_operand1)!
                         var b = Int64 (m_operand2)!
@@ -232,9 +246,10 @@ class ViewController: UIViewController {
                     break
                 case "-":
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
-                        labelUp.text = String(format: "%.2f",b - a)
+                        labelUp.text = String(format: "%.\(position)f",b - a)
                     }else{
                         var a = Int64 (m_operand1)!
                         var b = Int64 (m_operand2)!
@@ -246,9 +261,10 @@ class ViewController: UIViewController {
                     break
                 case "×":
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        var position = DotPositionForMutiply(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
-                        labelUp.text = String(b * a)
+                        labelUp.text = String(format: "%.\(position)f",b * a)
                     }else{
                         var a = Int64 (m_operand1)!
                         var b = Int64 (m_operand2)!
@@ -259,6 +275,7 @@ class ViewController: UIViewController {
                     labelDown.text = ""
                     break
                 case "÷":
+                    var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                     var a = Double (m_operand1)!
                     var b = Double (m_operand2)!
                     labelUp.text = String(format: "%.2f",b / a)
@@ -268,6 +285,7 @@ class ViewController: UIViewController {
                     break
                 case "%":
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
                         labelUp.text = String(format: "%.2f", (b.truncatingRemainder(dividingBy:a)))
@@ -295,11 +313,6 @@ class ViewController: UIViewController {
 
 
 
-
-
-
-
-    
             
             //Multiplication
 
@@ -309,12 +322,17 @@ class ViewController: UIViewController {
 
         case "×":
             if(labelDown.text != ""){
+                var point = LabelDownPoint(label: m_operand1)
+                if(point == 0){
+                    m_operand1 = String(m_operand1.dropLast())
+                }
                 switch (m_operator){
                 case "+":
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
-                        labelUp.text = String(a + b)
+                        labelUp.text = String(format: "%.\(position)f",a + b)
                     }else{
                         var a = Int64 (m_operand1)!
                         var b = Int64 (m_operand2)!
@@ -326,9 +344,10 @@ class ViewController: UIViewController {
                     break
                 case "-":
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
-                        labelUp.text = String(format: "%.2f",b - a)
+                        labelUp.text = String(format: "%.\(position)f",b - a)
                     }else{
                         var a = Int64 (m_operand1)!
                         var b = Int64 (m_operand2)!
@@ -340,9 +359,10 @@ class ViewController: UIViewController {
                     break
                 case "×":
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        var position = DotPositionForMutiply(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
-                        labelUp.text = String(b * a)
+                        labelUp.text = String(format: "%.\(position)f",b * a)
                     }else{
                         var a = Int64 (m_operand1)!
                         var b = Int64 (m_operand2)!
@@ -353,6 +373,7 @@ class ViewController: UIViewController {
                     labelDown.text = ""
                     break
                 case "÷":
+                    var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                     var a = Double (m_operand1)!
                     var b = Double (m_operand2)!
                     labelUp.text = String(format: "%.2f",b / a)
@@ -362,6 +383,7 @@ class ViewController: UIViewController {
                     break
                 case "%":
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
                         labelUp.text = String(format: "%.2f", (b.truncatingRemainder(dividingBy:a)))
@@ -398,12 +420,17 @@ class ViewController: UIViewController {
 
         case "÷":
             if(labelDown.text != ""){
+                var point = LabelDownPoint(label: m_operand1)
+                if(point == 0){
+                    m_operand1 = String(m_operand1.dropLast())
+                }
                 switch (m_operator){
                 case "+":
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
-                        labelUp.text = String(a + b)
+                        labelUp.text = String(format: "%.\(position)f",a + b)
                     }else{
                         var a = Int64 (m_operand1)!
                         var b = Int64 (m_operand2)!
@@ -415,9 +442,10 @@ class ViewController: UIViewController {
                     break
                 case "-":
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
-                        labelUp.text = String(format: "%.2f",b - a)
+                        labelUp.text = String(format: "%.\(position)f",b - a)
                     }else{
                         var a = Int64 (m_operand1)!
                         var b = Int64 (m_operand2)!
@@ -429,9 +457,10 @@ class ViewController: UIViewController {
                     break
                 case "×":
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        var position = DotPositionForMutiply(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
-                        labelUp.text = String(b * a)
+                        labelUp.text = String(format: "%.\(position)f",b * a)
                     }else{
                         var a = Int64 (m_operand1)!
                         var b = Int64 (m_operand2)!
@@ -442,6 +471,7 @@ class ViewController: UIViewController {
                     labelDown.text = ""
                     break
                 case "÷":
+                    var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                     var a = Double (m_operand1)!
                     var b = Double (m_operand2)!
                     labelUp.text = String(format: "%.2f",b / a)
@@ -451,6 +481,7 @@ class ViewController: UIViewController {
                     break
                 case "%":
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
                         labelUp.text = String(format: "%.2f", (b.truncatingRemainder(dividingBy:a)))
@@ -480,12 +511,17 @@ class ViewController: UIViewController {
 
         case "%":
             if(labelDown.text != ""){
+                var point = LabelDownPoint(label: m_operand1)
+                if(point == 0){
+                    m_operand1 = String(m_operand1.dropLast())
+                }
                 switch (m_operator){
                 case "+":
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
-                        labelUp.text = String(a + b)
+                        labelUp.text = String(format: "%.\(position)f",a + b)
                     }else{
                         var a = Int64 (m_operand1)!
                         var b = Int64 (m_operand2)!
@@ -497,9 +533,10 @@ class ViewController: UIViewController {
                     break
                 case "-":
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
-                        labelUp.text = String(format: "%.2f",b - a)
+                        labelUp.text = String(format: "%.\(position)f",b - a)
                     }else{
                         var a = Int64 (m_operand1)!
                         var b = Int64 (m_operand2)!
@@ -511,9 +548,10 @@ class ViewController: UIViewController {
                     break
                 case "×":
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        var position = DotPositionForMutiply(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
-                        labelUp.text = String(b * a)
+                        labelUp.text = String(format: "%.\(position)f",b * a)
                     }else{
                         var a = Int64 (m_operand1)!
                         var b = Int64 (m_operand2)!
@@ -524,6 +562,7 @@ class ViewController: UIViewController {
                     labelDown.text = ""
                     break
                 case "÷":
+                    var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                     var a = Double (m_operand1)!
                     var b = Double (m_operand2)!
                     labelUp.text = String(format: "%.2f",b / a)
@@ -533,6 +572,7 @@ class ViewController: UIViewController {
                     break
                 case "%":
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
                         labelUp.text = String(format: "%.2f", (b.truncatingRemainder(dividingBy:a)))
@@ -625,11 +665,94 @@ class ViewController: UIViewController {
             
         }
         
+    }
+    
+    func DotPosition(oper1:String, oper2:String) -> Int {
+        var dot1_positionFromFront = 0
+        if(oper1.contains(".")){
+            for cha1 in oper1 {
+                dot1_positionFromFront += 1
+                if(cha1 == "."){
+                    break
+                }
+            }
+        }
+        var dot2_positionFromFront = 0
+        if(oper2.contains(".")  ){
+            for cha2 in oper2 {
+                dot2_positionFromFront += 1
+                if(cha2 == "."){
+                    break
+                }
+            }
+        }
+        var dot1_positionfromEnd = 0
+        if(dot1_positionFromFront != 0){
+            dot1_positionfromEnd = oper1.count - dot1_positionFromFront
+        }
         
+        var dot2_positionfromEnd = 0
+        if(dot2_positionFromFront != 0){
+            dot2_positionfromEnd = oper2.count - dot2_positionFromFront
+        }
         
-        
+        if(dot1_positionfromEnd >= dot2_positionfromEnd){
+            return dot1_positionfromEnd
+        }
+        else{
+            return dot2_positionfromEnd
+        }
         
     }
     
+    func DotPositionForMutiply(oper1:String, oper2:String) -> Int {
+        var dot1_positionFromFront = 0
+        if(oper1.contains(".")){
+            for cha1 in oper1 {
+                dot1_positionFromFront += 1
+                if(cha1 == "."){
+                    break
+                }
+            }
+        }
+        var dot2_positionFromFront = 0
+        if(oper2.contains(".")  ){
+            for cha2 in oper2 {
+                dot2_positionFromFront += 1
+                if(cha2 == "."){
+                    break
+                }
+            }
+        }
+        var dot1_positionfromEnd = 0
+        if(dot1_positionFromFront != 0){
+            dot1_positionfromEnd = oper1.count - dot1_positionFromFront
+        }
+        
+        var dot2_positionfromEnd = 0
+        if(dot2_positionFromFront != 0){
+            dot2_positionfromEnd = oper2.count - dot2_positionFromFront
+        }
+        
+        return dot1_positionfromEnd + dot2_positionfromEnd
+        
+    }
+    
+    func LabelDownPoint(label : String) -> Int {
+        var dot1_positionFromFront = 0
+        if(label.contains(".")){
+            for cha1 in label {
+                dot1_positionFromFront += 1
+                if(cha1 == "."){
+                    break
+                }
+            }
+            
+            var dot1_positionfromEnd = label.count - dot1_positionFromFront
+            return dot1_positionfromEnd
+        }
+        return -1
+    }
+    
+    
 }
-
