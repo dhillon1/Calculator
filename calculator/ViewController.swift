@@ -3,7 +3,7 @@
  * Project: Calculator
  * Name: Simranjeet Singh Dhillon
  * StudentID: 301093914
- * Version: V10 - Icon and Launcher screen updated
+ * Version: V11 - Comments updated in ViewController.swift
  */
 
 
@@ -11,6 +11,11 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    /*
+     *Three UI label window are created for the repective job.
+     *first and third for previous and current operand.
+     * middle one for operator.
+    */
     @IBOutlet weak var labelUp: UILabel!
     @IBOutlet weak var labelDown: UILabel!
     @IBOutlet weak var labelMid: UILabel!
@@ -24,18 +29,23 @@ class ViewController: UIViewController {
         labelDown.text = "0"
         
     }
-    
+    // Changed the status bar color from default (dark) to the light color
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
 
 
-  
+   // All buttons are connected. This function is called when the button is clicked.
     @IBAction func keys(_ sender: UIButton) {
         var calculatorButton = sender.titleLabel?.text
         
+        //If text of button matches with the switch statement case then execution of case begins.
         switch (calculatorButton) {
+            
+        //case for "." button
         case ".":
+            
+            //called when label has some input
             if(!m_operand1.contains(".")){
                 m_operand1 += calculatorButton!
                 labelDown.text = m_operand1
@@ -43,79 +53,148 @@ class ViewController: UIViewController {
             break
             
             
-        case "+":
+           /*
+             Addition*****Addition*****Addition*****Addition*****Addition*****Addition*****Addition*****
+             Addition*****Addition*****Addition*****Addition*****Addition*****Addition*****Addition*****
+             Addition*****Addition*****Addition*****Addition*****Addition*****Addition*****Addition*****
+             */
             
+            
+           /*
+             Case for "+" button
+             this case has nested switch statement
+             the use case of nested switch statement helps in executing the operator stored in variable m_operator
+           */
+        case "+":
             if(labelDown.text != ""){
+                
+                //function LabelDownPoint helps to check if the value of input is "9." and then we click operator button
+                // so in conditions like these value should be converted to "9"
                 var point = LabelDownPoint(label: m_operand1)
                 if(point == 0){
                     m_operand1 = String(m_operand1.dropLast())
                 }
+                
+                // perform the operation in the case
+                // the case is executed having the value of operator
                 switch (m_operator){
                 case "+":
+                    
+                    // statement is called if operand contains decimal values
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        
+                        //function Dot postion checks for the rounding of output to the how many decimal places.
+                        // This function gives the Integer value for decimal places to round off.
                         var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
-                        labelUp.text = String(format: "%.\(position)f",a + b)
-                    }else{
+                        labelUp.text = String(format: "%.\(position)f",b + a)
+                    }
+                    
+                    else{
+                        
+                        // this statement is executed if operands does not have decimal values.
                         var a = Int64 (m_operand1)!
                         var b = Int64 (m_operand2)!
-                        labelUp.text = String(a + b)
+                        labelUp.text = String(b + a)
                     }
+                    
+                    //UI is updated
                     m_operand2 = labelUp.text!
                     m_operand1 = "0"
                     labelDown.text = ""
                     break
+                    
+                    
                 case "-":
+                    
+                    // statement is called if operands contains decimal values
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        
+                        //function Dot postion checks for the rounding of output to the how many decimal places.
+                        // This function gives the Integer value for decimal places to round off.
                         var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
                         labelUp.text = String(format: "%.\(position)f",b - a)
-                    }else{
+                    }
+                    
+                    else{
+                        // this statement is executed if operands does not have decimal values.
                         var a = Int64 (m_operand1)!
                         var b = Int64 (m_operand2)!
                         labelUp.text = String(b - a)
                     }
+                    
+                    //UI is updated
                     m_operand2 = labelUp.text!
                     m_operand1 = "0"
                     labelDown.text = ""
                     break
+                    
+                    
                 case "×":
+                    
+                    // statement is called if operands contains decimal values
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        
+                        //function Dot postion checks for the rounding of output to the how many decimal places.
+                        // This function gives the Integer value for decimal places to round off.
                         var position = DotPositionForMutiply(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
                         labelUp.text = String(format: "%.\(position)f",a * b)
-                    }else{
+                    }
+                    else{
+                        // this statement is executed if operands does not have decimal values.
                         var a = Int64 (m_operand1)!
                         var b = Int64 (m_operand2)!
                         labelUp.text = String(b * a)
                     }
+                    
+                    //UI is updated
                     m_operand2 = labelUp.text!
                     m_operand1 = "0"
                     labelDown.text = ""
                     break
+                    
+                    
                 case "÷":
+                    
+                    //function Dot postion checks for the rounding of output to the how many decimal places.
+                    // This function gives the Integer value for decimal places to round off.
                     var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                     var a = Double (m_operand1)!
                     var b = Double (m_operand2)!
+                    
+                    //UI is updated
                     labelUp.text = String(format: "%.2f",b / a)
                     m_operand2 = labelUp.text!
                     m_operand1 = "0"
                     labelDown.text = ""
                     break
+                    
+                    
+                    
                 case "%":
+                    
+                    // statement is called if operands contains decimal values
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        
+                        //function Dot postion checks for the rounding of output to the how many decimal places.
+                        // This function gives the Integer value for decimal places to round off.
                         var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
                         labelUp.text = String(format: "%.2f", (b.truncatingRemainder(dividingBy:a)))
                     }else{
+                        // this statement is executed if operands does not have decimal values.
                         var a = Int64 (m_operand1)!
                         var b = Int64 (m_operand2)!
                         labelUp.text = String(b % a)
                     }
+                    
+                    //UI is updated
                     m_operand2 = labelUp.text!
                     m_operand1 = "0"
                     labelDown.text = ""
@@ -132,9 +211,18 @@ class ViewController: UIViewController {
             break
             
             
-            //Equals
+            /*
+             Equals*****Equals*****Equals*****Equals*****Equals*****Equals*****Equals*****
+             Equals*****Equals*****Equals*****Equals*****Equals*****Equals*****Equals*****
+             Equals*****Equals*****Equals*****Equals*****Equals*****Equals*****Equals*****
+             */
             
             
+            /*
+             Case for "=" button
+             this case has nested switch statement
+             the use case of nested switch statement helps in executing the operator stored in variable m_operator
+             */
         case"=":
             if(labelDown.text != ""){
                 var point = LabelDownPoint(label: m_operand1)
@@ -144,12 +232,19 @@ class ViewController: UIViewController {
                 }
                 switch (m_operator){
                 case "+":
+                    
+                    // statement is called if operands contains decimal values
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        
+                        //function Dot postion checks for the rounding of output to the how many decimal places.
+                        // This function gives the Integer value for decimal places to round off.
                         var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
                         labelDown.text = String(format: "%.\(position)f",a + b)
                     }else{
+                        
+                        // this statement is executed if operands does not have decimal values.
                         var a = Int64 (m_operand1)!
                         var b = Int64 (m_operand2)!
                         labelDown.text = String(a + b)
@@ -157,43 +252,70 @@ class ViewController: UIViewController {
                     break
                     
                 case "-":
+                    
+                    // statement is called if operands contains decimal values
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        
+                        //function Dot postion checks for the rounding of output to the how many decimal places.
+                        // This function gives the Integer value for decimal places to round off.
                         var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
                         labelDown.text = String(format: "%.\(position)f",b - a)
                     }else{
+                        
+                        // this statement is executed if operands does not have decimal values.
                         var a = Int64 (m_operand1)!
                         var b = Int64 (m_operand2)!
                         labelDown.text = String(b - a)
                     }
                     
                     break
+                    
+                    
                 case "×":
+                    
+                    // statement is called if operands contains decimal values
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        //function Dot postion checks for the rounding of output to the how many decimal places.
+                        // This function gives the Integer value for decimal places to round off.
                         var position = DotPositionForMutiply(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
                         labelDown.text = String(format: "%.\(position)f",b * a)
                     }else{
+                        
+                        // this statement is executed if operands does not have decimal values.
                         var a = Int64 (m_operand1)!
                         var b = Int64 (m_operand2)!
                         labelDown.text = String(b * a)
                     }
                     break
+                    
+                    
                 case "÷":
+                    //function Dot postion checks for the rounding of output to the how many decimal places.
+                    // This function gives the Integer value for decimal places to round off.
                     var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                     var a = Double (m_operand1)!
                     var b = Double (m_operand2)!
                     labelDown.text = String(format: "%.2f",b / a)
                     break
+                    
+                    
                 case "%":
+                    
+                    // statement is called if operands contains decimal values
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        //function Dot postion checks for the rounding of output to the how many decimal places.
+                        // This function gives the Integer value for decimal places to round off.
                         var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
                         labelDown.text = String(format: "%.2f", (b.truncatingRemainder(dividingBy:a)))
                     }else{
+                        
+                        // this statement is executed if operands does not have decimal values.
                         var a = Int64 (m_operand1)!
                         var b = Int64 (m_operand2)!
                         labelDown.text = String(b % a)
@@ -202,6 +324,8 @@ class ViewController: UIViewController {
                 default:
                     break
                 }
+                
+                //UI is update
                 m_operator = ""
                 labelMid.text = ""
                 labelUp.text = ""
@@ -209,6 +333,8 @@ class ViewController: UIViewController {
                 m_operand1 = labelDown.text!
                 return
             }
+            
+            //UI is update
             labelDown.text = m_operand2
             m_operator = ""
             labelMid.text = ""
@@ -219,81 +345,146 @@ class ViewController: UIViewController {
             
             
             
-            // Subtraction
+    /*
+    Subtraction*****Subtraction*****Subtraction*****Subtraction*****Subtraction*****Subtraction*****Subtraction*****
+    Subtraction*****Subtraction*****Subtraction*****Subtraction*****Subtraction*****Subtraction*****Subtraction*****
+    Subtraction*****Subtraction*****Subtraction*****Subtraction*****Subtraction*****Subtraction*****Subtraction*****
+    */
 
-
+            
+        
         case "-":
+            
             if(labelDown.text != ""){
+                
+                //function LabelDownPoint helps to check if the value of input is "9." and then we click operator button
+                // so in conditions like these value should be converted to "9"
                 var point = LabelDownPoint(label: m_operand1)
                 if(point == 0){
                     m_operand1 = String(m_operand1.dropLast())
                 }
+                
+                // perform the operation in the case
+                // the case is executed having the value of operator
                 switch (m_operator){
+                    
                 case "+":
+                    
+                    // statement is called if operand contains decimal values
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        
+                        //function Dot postion checks for the rounding of output to the how many decimal places.
+                        // This function gives the Integer value for decimal places to round off.
                         var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
-                        labelUp.text = String(format: "%.\(position)f",a + b)
-                    }else{
+                        labelUp.text = String(format: "%.\(position)f",b + a)
+                    }
+                        
+                    else{
+                        
+                        // this statement is executed if operands does not have decimal values.
                         var a = Int64 (m_operand1)!
                         var b = Int64 (m_operand2)!
-                        labelUp.text = String(a + b)
+                        labelUp.text = String(b + a)
                     }
+                    
+                    //UI is updated
                     m_operand2 = labelUp.text!
                     m_operand1 = "0"
                     labelDown.text = ""
                     break
+                    
+                    
                 case "-":
+                    
+                    // statement is called if operands contains decimal values
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        
+                        //function Dot postion checks for the rounding of output to the how many decimal places.
+                        // This function gives the Integer value for decimal places to round off.
                         var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
                         labelUp.text = String(format: "%.\(position)f",b - a)
-                    }else{
+                    }
+                        
+                    else{
+                        // this statement is executed if operands does not have decimal values.
                         var a = Int64 (m_operand1)!
                         var b = Int64 (m_operand2)!
                         labelUp.text = String(b - a)
                     }
+                    
+                    //UI is updated
                     m_operand2 = labelUp.text!
                     m_operand1 = "0"
                     labelDown.text = ""
                     break
+                    
+                    
                 case "×":
+                    
+                    // statement is called if operands contains decimal values
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        
+                        //function Dot postion checks for the rounding of output to the how many decimal places.
+                        // This function gives the Integer value for decimal places to round off.
                         var position = DotPositionForMutiply(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
-                        labelUp.text = String(format: "%.\(position)f",b * a)
-                    }else{
+                        labelUp.text = String(format: "%.\(position)f",a * b)
+                    }
+                    else{
+                        // this statement is executed if operands does not have decimal values.
                         var a = Int64 (m_operand1)!
                         var b = Int64 (m_operand2)!
                         labelUp.text = String(b * a)
                     }
+                    
+                    //UI is updated
                     m_operand2 = labelUp.text!
                     m_operand1 = "0"
                     labelDown.text = ""
                     break
+                    
+                    
                 case "÷":
+                    
+                    //function Dot postion checks for the rounding of output to the how many decimal places.
+                    // This function gives the Integer value for decimal places to round off.
                     var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                     var a = Double (m_operand1)!
                     var b = Double (m_operand2)!
+                    
+                    //UI is updated
                     labelUp.text = String(format: "%.2f",b / a)
                     m_operand2 = labelUp.text!
                     m_operand1 = "0"
                     labelDown.text = ""
                     break
+                    
+                    
+                    
                 case "%":
+                    
+                    // statement is called if operands contains decimal values
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        
+                        //function Dot postion checks for the rounding of output to the how many decimal places.
+                        // This function gives the Integer value for decimal places to round off.
                         var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
                         labelUp.text = String(format: "%.2f", (b.truncatingRemainder(dividingBy:a)))
                     }else{
+                        // this statement is executed if operands does not have decimal values.
                         var a = Int64 (m_operand1)!
                         var b = Int64 (m_operand2)!
                         labelUp.text = String(b % a)
                     }
+                    
+                    //UI is updated
                     m_operand2 = labelUp.text!
                     m_operand1 = "0"
                     labelDown.text = ""
@@ -305,6 +496,7 @@ class ViewController: UIViewController {
                     labelDown.text = ""
                 }
             }
+            
             m_operator = "-"
             labelMid.text = "-"
 
@@ -314,105 +506,173 @@ class ViewController: UIViewController {
 
 
             
-            //Multiplication
+/*
+Multiplication*****Multiplication*****Multiplication*****Multiplication*****Multiplication*****Multiplication*****
+Multiplication*****Multiplication*****Multiplication*****Multiplication*****Multiplication*****Multiplication*****
+Multiplication*****Multiplication*****Multiplication*****Multiplication*****Multiplication*****Multiplication*****
+*/
 
 
 
 
 
         case "×":
+            
             if(labelDown.text != ""){
-                var point = LabelDownPoint(label: m_operand1)
-                if(point == 0){
-                    m_operand1 = String(m_operand1.dropLast())
-                }
-                switch (m_operator){
-                case "+":
-                    if(m_operand1.contains(".") || m_operand2.contains(".")){
-                        var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
-                        var a = Double (m_operand1)!
-                        var b = Double (m_operand2)!
-                        labelUp.text = String(format: "%.\(position)f",a + b)
-                    }else{
-                        var a = Int64 (m_operand1)!
-                        var b = Int64 (m_operand2)!
-                        labelUp.text = String(a + b)
-                    }
-                    m_operand2 = labelUp.text!
-                    m_operand1 = "0"
-                    labelDown.text = ""
-                    break
-                case "-":
-                    if(m_operand1.contains(".") || m_operand2.contains(".")){
-                        var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
-                        var a = Double (m_operand1)!
-                        var b = Double (m_operand2)!
-                        labelUp.text = String(format: "%.\(position)f",b - a)
-                    }else{
-                        var a = Int64 (m_operand1)!
-                        var b = Int64 (m_operand2)!
-                        labelUp.text = String(b - a)
-                    }
-                    m_operand2 = labelUp.text!
-                    m_operand1 = "0"
-                    labelDown.text = ""
-                    break
-                case "×":
-                    if(m_operand1.contains(".") || m_operand2.contains(".")){
-                        var position = DotPositionForMutiply(oper1: m_operand1, oper2: m_operand2)
-                        var a = Double (m_operand1)!
-                        var b = Double (m_operand2)!
-                        labelUp.text = String(format: "%.\(position)f",b * a)
-                    }else{
-                        var a = Int64 (m_operand1)!
-                        var b = Int64 (m_operand2)!
-                        labelUp.text = String(b * a)
-                    }
-                    m_operand2 = labelUp.text!
-                    m_operand1 = "0"
-                    labelDown.text = ""
-                    break
-                case "÷":
+            
+            //function LabelDownPoint helps to check if the value of input is "9." and then we click operator button
+            // so in conditions like these value should be converted to "9"
+            var point = LabelDownPoint(label: m_operand1)
+            if(point == 0){
+                m_operand1 = String(m_operand1.dropLast())
+            }
+            
+            // perform the operation in the case
+            // the case is executed having the value of operator
+            switch (m_operator){
+                
+            case "+":
+                
+                // statement is called if operand contains decimal values
+                if(m_operand1.contains(".") || m_operand2.contains(".")){
+                    
+                    //function Dot postion checks for the rounding of output to the how many decimal places.
+                    // This function gives the Integer value for decimal places to round off.
                     var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                     var a = Double (m_operand1)!
                     var b = Double (m_operand2)!
-                    labelUp.text = String(format: "%.2f",b / a)
-                    m_operand2 = labelUp.text!
-                    m_operand1 = "0"
-                    labelDown.text = ""
-                    break
-                case "%":
-                    if(m_operand1.contains(".") || m_operand2.contains(".")){
-                        var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
-                        var a = Double (m_operand1)!
-                        var b = Double (m_operand2)!
-                        labelUp.text = String(format: "%.2f", (b.truncatingRemainder(dividingBy:a)))
-                    }else{
-                        var a = Int64 (m_operand1)!
-                        var b = Int64 (m_operand2)!
-                        labelUp.text = String(b % a)
-                    }
-                    m_operand2 = labelUp.text!
-                    m_operand1 = "0"
-                    labelDown.text = ""
-                    break
-                default:
-                    labelUp.text = m_operand1
-                    m_operand2 = labelUp.text!
-                    m_operand1 = "0"
-                    labelDown.text = ""
+                    labelUp.text = String(format: "%.\(position)f",b + a)
                 }
+                    
+                else{
+                    
+                    // this statement is executed if operands does not have decimal values.
+                    var a = Int64 (m_operand1)!
+                    var b = Int64 (m_operand2)!
+                    labelUp.text = String(b + a)
+                }
+                
+                //UI is updated
+                m_operand2 = labelUp.text!
+                m_operand1 = "0"
+                labelDown.text = ""
+                break
+                
+                
+            case "-":
+                
+                // statement is called if operands contains decimal values
+                if(m_operand1.contains(".") || m_operand2.contains(".")){
+                    
+                    //function Dot postion checks for the rounding of output to the how many decimal places.
+                    // This function gives the Integer value for decimal places to round off.
+                    var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
+                    var a = Double (m_operand1)!
+                    var b = Double (m_operand2)!
+                    labelUp.text = String(format: "%.\(position)f",b - a)
+                }
+                    
+                else{
+                    // this statement is executed if operands does not have decimal values.
+                    var a = Int64 (m_operand1)!
+                    var b = Int64 (m_operand2)!
+                    labelUp.text = String(b - a)
+                }
+                
+                //UI is updated
+                m_operand2 = labelUp.text!
+                m_operand1 = "0"
+                labelDown.text = ""
+                break
+                
+                
+            case "×":
+                
+                // statement is called if operands contains decimal values
+                if(m_operand1.contains(".") || m_operand2.contains(".")){
+                    
+                    //function Dot postion checks for the rounding of output to the how many decimal places.
+                    // This function gives the Integer value for decimal places to round off.
+                    var position = DotPositionForMutiply(oper1: m_operand1, oper2: m_operand2)
+                    var a = Double (m_operand1)!
+                    var b = Double (m_operand2)!
+                    labelUp.text = String(format: "%.\(position)f",a * b)
+                }
+                else{
+                    // this statement is executed if operands does not have decimal values.
+                    var a = Int64 (m_operand1)!
+                    var b = Int64 (m_operand2)!
+                    labelUp.text = String(b * a)
+                }
+                
+                //UI is updated
+                m_operand2 = labelUp.text!
+                m_operand1 = "0"
+                labelDown.text = ""
+                break
+                
+                
+            case "÷":
+                
+                //function Dot postion checks for the rounding of output to the how many decimal places.
+                // This function gives the Integer value for decimal places to round off.
+                var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
+                var a = Double (m_operand1)!
+                var b = Double (m_operand2)!
+                
+                //UI is updated
+                labelUp.text = String(format: "%.2f",b / a)
+                m_operand2 = labelUp.text!
+                m_operand1 = "0"
+                labelDown.text = ""
+                break
+                
+                
+                
+            case "%":
+                
+                // statement is called if operands contains decimal values
+                if(m_operand1.contains(".") || m_operand2.contains(".")){
+                    
+                    //function Dot postion checks for the rounding of output to the how many decimal places.
+                    // This function gives the Integer value for decimal places to round off.
+                    var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
+                    var a = Double (m_operand1)!
+                    var b = Double (m_operand2)!
+                    labelUp.text = String(format: "%.2f", (b.truncatingRemainder(dividingBy:a)))
+                }else{
+                    // this statement is executed if operands does not have decimal values.
+                    var a = Int64 (m_operand1)!
+                    var b = Int64 (m_operand2)!
+                    labelUp.text = String(b % a)
+                }
+                
+                //UI is updated
+                m_operand2 = labelUp.text!
+                m_operand1 = "0"
+                labelDown.text = ""
+                break
+                
+            default:
+                labelUp.text = m_operand1
+                m_operand2 = labelUp.text!
+                m_operand1 = "0"
+                labelDown.text = ""
             }
-            m_operator = "×"
-            labelMid.text = "×"
-            
-            break
+        }
+        m_operator = "×"
+        labelMid.text = "×"
+        break
 
 
 
 
 
-            //Dividation
+            /*
+             Dividation*****Dividation*****Dividation*****Dividation*****Dividation*****Dividation*****Dividation*****
+             Dividation*****Dividation*****Dividation*****Dividation*****Dividation*****Dividation*****Dividation*****
+             Dividation*****Dividation*****Dividation*****Dividation*****Dividation*****Dividation*****Dividation*****
+            */
 
 
 
@@ -420,80 +680,140 @@ class ViewController: UIViewController {
 
         case "÷":
             if(labelDown.text != ""){
+                
+                //function LabelDownPoint helps to check if the value of input is "9." and then we click operator button
+                // so in conditions like these value should be converted to "9"
                 var point = LabelDownPoint(label: m_operand1)
                 if(point == 0){
                     m_operand1 = String(m_operand1.dropLast())
                 }
+                
+                // perform the operation in the case
+                // the case is executed having the value of operator
                 switch (m_operator){
+                    
                 case "+":
+                    
+                    // statement is called if operand contains decimal values
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        
+                        //function Dot postion checks for the rounding of output to the how many decimal places.
+                        // This function gives the Integer value for decimal places to round off.
                         var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
-                        labelUp.text = String(format: "%.\(position)f",a + b)
-                    }else{
+                        labelUp.text = String(format: "%.\(position)f",b + a)
+                    }
+                        
+                    else{
+                        
+                        // this statement is executed if operands does not have decimal values.
                         var a = Int64 (m_operand1)!
                         var b = Int64 (m_operand2)!
-                        labelUp.text = String(a + b)
+                        labelUp.text = String(b + a)
                     }
+                    
+                    //UI is updated
                     m_operand2 = labelUp.text!
                     m_operand1 = "0"
                     labelDown.text = ""
                     break
+                    
+                    
                 case "-":
+                    
+                    // statement is called if operands contains decimal values
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        
+                        //function Dot postion checks for the rounding of output to the how many decimal places.
+                        // This function gives the Integer value for decimal places to round off.
                         var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
                         labelUp.text = String(format: "%.\(position)f",b - a)
-                    }else{
+                    }
+                        
+                    else{
+                        // this statement is executed if operands does not have decimal values.
                         var a = Int64 (m_operand1)!
                         var b = Int64 (m_operand2)!
                         labelUp.text = String(b - a)
                     }
+                    
+                    //UI is updated
                     m_operand2 = labelUp.text!
                     m_operand1 = "0"
                     labelDown.text = ""
                     break
+                    
+                    
                 case "×":
+                    
+                    // statement is called if operands contains decimal values
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        
+                        //function Dot postion checks for the rounding of output to the how many decimal places.
+                        // This function gives the Integer value for decimal places to round off.
                         var position = DotPositionForMutiply(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
-                        labelUp.text = String(format: "%.\(position)f",b * a)
-                    }else{
+                        labelUp.text = String(format: "%.\(position)f",a * b)
+                    }
+                    else{
+                        // this statement is executed if operands does not have decimal values.
                         var a = Int64 (m_operand1)!
                         var b = Int64 (m_operand2)!
                         labelUp.text = String(b * a)
                     }
+                    
+                    //UI is updated
                     m_operand2 = labelUp.text!
                     m_operand1 = "0"
                     labelDown.text = ""
                     break
+                    
+                    
                 case "÷":
+                    
+                    //function Dot postion checks for the rounding of output to the how many decimal places.
+                    // This function gives the Integer value for decimal places to round off.
                     var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                     var a = Double (m_operand1)!
                     var b = Double (m_operand2)!
+                    
+                    //UI is updated
                     labelUp.text = String(format: "%.2f",b / a)
                     m_operand2 = labelUp.text!
                     m_operand1 = "0"
                     labelDown.text = ""
                     break
+                    
+                    
+                    
                 case "%":
+                    
+                    // statement is called if operands contains decimal values
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        
+                        //function Dot postion checks for the rounding of output to the how many decimal places.
+                        // This function gives the Integer value for decimal places to round off.
                         var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
                         labelUp.text = String(format: "%.2f", (b.truncatingRemainder(dividingBy:a)))
                     }else{
+                        // this statement is executed if operands does not have decimal values.
                         var a = Int64 (m_operand1)!
                         var b = Int64 (m_operand2)!
                         labelUp.text = String(b % a)
                     }
+                    
+                    //UI is updated
                     m_operand2 = labelUp.text!
                     m_operand1 = "0"
                     labelDown.text = ""
                     break
+                    
                 default:
                     labelUp.text = m_operand1
                     m_operand2 = labelUp.text!
@@ -506,85 +826,151 @@ class ViewController: UIViewController {
             break
 
 
+            
+            /*
+             Remainder*****Remainder*****Remainder*****Remainder*****Remainder*****Remainder*****Remainder*****
+             Remainder*****Remainder*****Remainder*****Remainder*****Remainder*****Remainder*****Remainder*****
+             Remainder*****Remainder*****Remainder*****Remainder*****Remainder*****Remainder*****Remainder*****
+            */
 
 
 
         case "%":
             if(labelDown.text != ""){
+                
+                //function LabelDownPoint helps to check if the value of input is "9." and then we click operator button
+                // so in conditions like these value should be converted to "9".
                 var point = LabelDownPoint(label: m_operand1)
                 if(point == 0){
                     m_operand1 = String(m_operand1.dropLast())
                 }
+                
+                // perform the operation in the case
+                // the case is executed having the value of operator
                 switch (m_operator){
+                    
                 case "+":
+                    
+                    // statement is called if operand contains decimal values
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        
+                        //function Dot postion checks for the rounding of output to the how many decimal places.
+                        // This function gives the Integer value for decimal places to round off.
                         var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
-                        labelUp.text = String(format: "%.\(position)f",a + b)
-                    }else{
+                        labelUp.text = String(format: "%.\(position)f",b + a)
+                    }
+                        
+                    else{
+                        
+                        // this statement is executed if operands does not have decimal values.
                         var a = Int64 (m_operand1)!
                         var b = Int64 (m_operand2)!
-                        labelUp.text = String(a + b)
+                        labelUp.text = String(b + a)
                     }
+                    
+                    //UI is updated
                     m_operand2 = labelUp.text!
                     m_operand1 = "0"
                     labelDown.text = ""
                     break
+                    
+                    
                 case "-":
+                    
+                    // statement is called if operands contains decimal values
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        
+                        //function Dot postion checks for the rounding of output to the how many decimal places.
+                        // This function gives the Integer value for decimal places to round off.
                         var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
                         labelUp.text = String(format: "%.\(position)f",b - a)
-                    }else{
+                    }
+                        
+                    else{
+                        // this statement is executed if operands does not have decimal values.
                         var a = Int64 (m_operand1)!
                         var b = Int64 (m_operand2)!
                         labelUp.text = String(b - a)
                     }
+                    
+                    //UI is updated
                     m_operand2 = labelUp.text!
                     m_operand1 = "0"
                     labelDown.text = ""
                     break
+                    
+                    
                 case "×":
+                    
+                    // statement is called if operands contains decimal values
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        
+                        //function Dot postion checks for the rounding of output to the how many decimal places.
+                        // This function gives the Integer value for decimal places to round off.
                         var position = DotPositionForMutiply(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
-                        labelUp.text = String(format: "%.\(position)f",b * a)
-                    }else{
+                        labelUp.text = String(format: "%.\(position)f",a * b)
+                    }
+                    else{
+                        // this statement is executed if operands does not have decimal values.
                         var a = Int64 (m_operand1)!
                         var b = Int64 (m_operand2)!
                         labelUp.text = String(b * a)
                     }
+                    
+                    //UI is updated
                     m_operand2 = labelUp.text!
                     m_operand1 = "0"
                     labelDown.text = ""
                     break
+                    
+                    
                 case "÷":
+                    
+                    //function Dot postion checks for the rounding of output to the how many decimal places.
+                    // This function gives the Integer value for decimal places to round off.
                     var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                     var a = Double (m_operand1)!
                     var b = Double (m_operand2)!
+                    
+                    //UI is updated
                     labelUp.text = String(format: "%.2f",b / a)
                     m_operand2 = labelUp.text!
                     m_operand1 = "0"
                     labelDown.text = ""
                     break
+                    
+                    
+                    
                 case "%":
+                    
+                    // statement is called if operands contains decimal values
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
+                        
+                        //function Dot postion checks for the rounding of output to the how many decimal places.
+                        // This function gives the Integer value for decimal places to round off.
                         var position = DotPosition(oper1: m_operand1, oper2: m_operand2)
                         var a = Double (m_operand1)!
                         var b = Double (m_operand2)!
                         labelUp.text = String(format: "%.2f", (b.truncatingRemainder(dividingBy:a)))
                     }else{
+                        // this statement is executed if operands does not have decimal values.
                         var a = Int64 (m_operand1)!
                         var b = Int64 (m_operand2)!
                         labelUp.text = String(b % a)
                     }
+                    
+                    //UI is updated
                     m_operand2 = labelUp.text!
                     m_operand1 = "0"
                     labelDown.text = ""
                     break
+                    
                 default:
                     labelUp.text = m_operand1
                     m_operand2 = labelUp.text!
@@ -597,7 +983,10 @@ class ViewController: UIViewController {
             break
 
 
+        // This statement is called to clear the last digit of operand and show the new operand.
         case"C":
+            
+            //This statement tells if the operand have negative integer than execute and drop the last digit.
             if(labelDown.text!.contains("-")){
                 m_operand1 = String (m_operand1.dropLast())
                 if(m_operand1.count == 1){
@@ -611,6 +1000,8 @@ class ViewController: UIViewController {
                     }
                 }
                 labelDown.text = m_operand1
+                
+                //This statement tells if the operand have non-negative integer than execute and drop the last digit.
             }else{
                 m_operand1 = String (m_operand1.dropLast())
                 if(m_operand1.count == 0){
@@ -627,6 +1018,7 @@ class ViewController: UIViewController {
             }
             break
 
+            // This statement just clears the expression.
         case"CE":
             m_operand1 = "0"
             labelDown.text = "0"
@@ -636,6 +1028,7 @@ class ViewController: UIViewController {
             labelMid.text = ""
             break
 
+            //This statement makes the non-negative expression to negative and vice-versa.
         case"+/-":
             if(m_operand1 != "0" ){
                 if(m_operand1.contains("-")){
@@ -651,8 +1044,7 @@ class ViewController: UIViewController {
 
 
             
-            
-            
+        //This statement is called when the number buttons 0,1,2,3,4,5,6,7,8 and 9 is clicked. Then statement is executed.
         default:
             if(m_operand1 == "0"){
                 m_operand1 = calculatorButton!
@@ -667,6 +1059,10 @@ class ViewController: UIViewController {
         
     }
     
+    
+
+    //function Dot postion checks for the rounding of output to the how many decimal places.
+    // This function gives the Integer value for decimal places to round off.
     func DotPosition(oper1:String, oper2:String) -> Int {
         var dot1_positionFromFront = 0
         if(oper1.contains(".")){
@@ -705,6 +1101,8 @@ class ViewController: UIViewController {
         
     }
     
+    //function Dot postion checks for the rounding of output to the how many decimal places.
+    // This function gives the Integer value for decimal places to round off.
     func DotPositionForMutiply(oper1:String, oper2:String) -> Int {
         var dot1_positionFromFront = 0
         if(oper1.contains(".")){
@@ -738,6 +1136,8 @@ class ViewController: UIViewController {
         
     }
     
+    //function LabelDownPoint helps to check if the value of input is "9." and then we click operator button
+    // so in conditions like these value should be converted to "9"
     func LabelDownPoint(label : String) -> Int {
         var dot1_positionFromFront = 0
         if(label.contains(".")){
