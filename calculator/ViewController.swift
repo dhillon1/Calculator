@@ -3,7 +3,7 @@
  * Project: Calculator
  * Name: Simranjeet Singh Dhillon
  * StudentID: 301093914
- * Version: V12 - Repeatitive variable eliminated
+ * Version: V13 - 0 ÷ 0 was giving error. Now working fine
  */
 
 
@@ -170,11 +170,20 @@ class ViewController: UIViewController {
                     
                     
                 case "÷":
-                    
+                    if(!m_operand1.contains("1") && !m_operand1.contains("2") && !m_operand1.contains("3") && !m_operand1.contains("4") && !m_operand1.contains("5") && !m_operand1.contains("6") &&
+                        !m_operand1.contains("7") && !m_operand1.contains("8") && !m_operand1.contains("9")){
+                        labelDown.text = "Error"
+                        m_operand1 = "0"
+                        m_operand2 = "0"
+                        labelMid.text = ""
+                        labelUp.text = ""
+                        return
+                    }
                     //function Dot postion checks for the rounding of output to the how many decimal places.
                     // This function gives the Integer value for decimal places to round off.
                     m_input1_double = Double (m_operand1)!
                     m_input2_double = Double (m_operand2)!
+                    
                     
                     //UI is updated
                     labelUp.text = String(format: "%.3f",m_input2_double / m_input1_double)
@@ -186,6 +195,16 @@ class ViewController: UIViewController {
                     
                     
                 case "%":
+                    
+                    if(!m_operand1.contains("1") && !m_operand1.contains("2") && !m_operand1.contains("3") && !m_operand1.contains("4") && !m_operand1.contains("5") && !m_operand1.contains("6") &&
+                        !m_operand1.contains("7") && !m_operand1.contains("8") && !m_operand1.contains("9")){
+                        labelDown.text = "Error"
+                        m_operand1 = "0"
+                        m_operand2 = "0"
+                        labelMid.text = ""
+                        labelUp.text = ""
+                        return
+                    }
                     
                     // statement is called if operands contains decimal values
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
@@ -303,6 +322,16 @@ class ViewController: UIViewController {
                     
                     
                 case "÷":
+                    
+                    if(!m_operand1.contains("1") && !m_operand1.contains("2") && !m_operand1.contains("3") && !m_operand1.contains("4") && !m_operand1.contains("5") && !m_operand1.contains("6") &&
+                        !m_operand1.contains("7") && !m_operand1.contains("8") && !m_operand1.contains("9")){
+                        labelDown.text = "Error"
+                        m_operand1 = "0"
+                        m_operand2 = "0"
+                        labelMid.text = ""
+                        labelUp.text = ""
+                        return
+                    }
                     //function Dot postion checks for the rounding of output to the how many decimal places.
                     // This function gives the Integer value for decimal places to round off.
                     m_input1_double = Double (m_operand1)!
@@ -312,6 +341,16 @@ class ViewController: UIViewController {
                     
                     
                 case "%":
+                    
+                    if(!m_operand1.contains("1") && !m_operand1.contains("2") && !m_operand1.contains("3") && !m_operand1.contains("4") && !m_operand1.contains("5") && !m_operand1.contains("6") &&
+                        !m_operand1.contains("7") && !m_operand1.contains("8") && !m_operand1.contains("9")){
+                        labelDown.text = "Error"
+                        m_operand1 = "0"
+                        m_operand2 = "0"
+                        labelMid.text = ""
+                        labelUp.text = ""
+                        return
+                    }
                     
                     // statement is called if operands contains decimal values
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
@@ -352,11 +391,11 @@ class ViewController: UIViewController {
             
             
             
-            /*
-             Subtraction*****Subtraction*****Subtraction*****Subtraction*****Subtraction*****Subtraction*****Subtraction*****
-             Subtraction*****Subtraction*****Subtraction*****Subtraction*****Subtraction*****Subtraction*****Subtraction*****
-             Subtraction*****Subtraction*****Subtraction*****Subtraction*****Subtraction*****Subtraction*****Subtraction*****
-             */
+        /*
+        Subtraction*****Subtraction*****Subtraction*****Subtraction*****Subtraction*****Subtraction*****Subtraction*****
+        Subtraction*****Subtraction*****Subtraction*****Subtraction*****Subtraction*****Subtraction*****Subtraction*****
+        Subtraction*****Subtraction*****Subtraction*****Subtraction*****Subtraction*****Subtraction*****Subtraction*****
+        */
             
             
             
@@ -458,6 +497,16 @@ class ViewController: UIViewController {
                     
                 case "÷":
                     
+                    if(!m_operand1.contains("1") && !m_operand1.contains("2") && !m_operand1.contains("3") && !m_operand1.contains("4") && !m_operand1.contains("5") && !m_operand1.contains("6") &&
+                        !m_operand1.contains("7") && !m_operand1.contains("8") && !m_operand1.contains("9")){
+                        labelDown.text = "Error"
+                        m_operand1 = "0"
+                        m_operand2 = "0"
+                        labelMid.text = ""
+                        labelUp.text = ""
+                        return
+                    }
+                    
                     //function Dot postion checks for the rounding of output to the how many decimal places.
                     // This function gives the Integer value for decimal places to round off.
                     
@@ -474,6 +523,16 @@ class ViewController: UIViewController {
                     
                     
                 case "%":
+                    
+                    if(!m_operand1.contains("1") && !m_operand1.contains("2") && !m_operand1.contains("3") && !m_operand1.contains("4") && !m_operand1.contains("5") && !m_operand1.contains("6") &&
+                        !m_operand1.contains("7") && !m_operand1.contains("8") && !m_operand1.contains("9")){
+                        labelDown.text = "Error"
+                        m_operand1 = "0"
+                        m_operand2 = "0"
+                        labelMid.text = ""
+                        labelUp.text = ""
+                        return
+                    }
                     
                     // statement is called if operands contains decimal values
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
@@ -514,11 +573,11 @@ class ViewController: UIViewController {
             
             
             
-            /*
-             Multiplication*****Multiplication*****Multiplication*****Multiplication*****Multiplication*****Multiplication*****
-             Multiplication*****Multiplication*****Multiplication*****Multiplication*****Multiplication*****Multiplication*****
-             Multiplication*****Multiplication*****Multiplication*****Multiplication*****Multiplication*****Multiplication*****
-             */
+        /*
+        Multiplication*****Multiplication*****Multiplication*****Multiplication*****Multiplication*****Multiplication*****
+        Multiplication*****Multiplication*****Multiplication*****Multiplication*****Multiplication*****Multiplication*****
+        Multiplication*****Multiplication*****Multiplication*****Multiplication*****Multiplication*****Multiplication*****
+        */
             
             
             
@@ -622,6 +681,16 @@ class ViewController: UIViewController {
                     
                 case "÷":
                     
+                    if(!m_operand1.contains("1") && !m_operand1.contains("2") && !m_operand1.contains("3") && !m_operand1.contains("4") && !m_operand1.contains("5") && !m_operand1.contains("6") &&
+                        !m_operand1.contains("7") && !m_operand1.contains("8") && !m_operand1.contains("9")){
+                        labelDown.text = "Error"
+                        m_operand1 = "0"
+                        m_operand2 = "0"
+                        labelMid.text = ""
+                        labelUp.text = ""
+                        return
+                    }
+                    
                     //function Dot postion checks for the rounding of output to the how many decimal places.
                     // This function gives the Integer value for decimal places to round off.
                     
@@ -638,6 +707,16 @@ class ViewController: UIViewController {
                     
                     
                 case "%":
+                    
+                    if(!m_operand1.contains("1") && !m_operand1.contains("2") && !m_operand1.contains("3") && !m_operand1.contains("4") && !m_operand1.contains("5") && !m_operand1.contains("6") &&
+                        !m_operand1.contains("7") && !m_operand1.contains("8") && !m_operand1.contains("9")){
+                        labelDown.text = "Error"
+                        m_operand1 = "0"
+                        m_operand2 = "0"
+                        labelMid.text = ""
+                        labelUp.text = ""
+                        return
+                    }
                     
                     // statement is called if operands contains decimal values
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
@@ -783,6 +862,16 @@ class ViewController: UIViewController {
                     
                 case "÷":
                     
+                    if(!m_operand1.contains("1") && !m_operand1.contains("2") && !m_operand1.contains("3") && !m_operand1.contains("4") && !m_operand1.contains("5") && !m_operand1.contains("6") &&
+                        !m_operand1.contains("7") && !m_operand1.contains("8") && !m_operand1.contains("9")){
+                        labelDown.text = "Error"
+                        m_operand1 = "0"
+                        m_operand2 = "0"
+                        labelMid.text = ""
+                        labelUp.text = ""
+                        return
+                    }
+                    
                     //function Dot postion checks for the rounding of output to the how many decimal places.
                     // This function gives the Integer value for decimal places to round off.
                     m_input1_double = Double (m_operand1)!
@@ -798,6 +887,16 @@ class ViewController: UIViewController {
                     
                     
                 case "%":
+                    
+                    if(!m_operand1.contains("1") && !m_operand1.contains("2") && !m_operand1.contains("3") && !m_operand1.contains("4") && !m_operand1.contains("5") && !m_operand1.contains("6") &&
+                        !m_operand1.contains("7") && !m_operand1.contains("8") && !m_operand1.contains("9")){
+                        labelDown.text = "Error"
+                        m_operand1 = "0"
+                        m_operand2 = "0"
+                        labelMid.text = ""
+                        labelUp.text = ""
+                        return
+                    }
                     
                     // statement is called if operands contains decimal values
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
@@ -939,6 +1038,16 @@ class ViewController: UIViewController {
                     
                 case "÷":
                     
+                    if(!m_operand1.contains("1") && !m_operand1.contains("2") && !m_operand1.contains("3") && !m_operand1.contains("4") && !m_operand1.contains("5") && !m_operand1.contains("6") &&
+                        !m_operand1.contains("7") && !m_operand1.contains("8") && !m_operand1.contains("9")){
+                        labelDown.text = "Error"
+                        m_operand1 = "0"
+                        m_operand2 = "0"
+                        labelMid.text = ""
+                        labelUp.text = ""
+                        return
+                    }
+                    
                     //function Dot postion checks for the rounding of output to the how many decimal places.
                     // This function gives the Integer value for decimal places to round off.
                     
@@ -955,6 +1064,16 @@ class ViewController: UIViewController {
                     
                     
                 case "%":
+                    
+                    if(!m_operand1.contains("1") && !m_operand1.contains("2") && !m_operand1.contains("3") && !m_operand1.contains("4") && !m_operand1.contains("5") && !m_operand1.contains("6") &&
+                        !m_operand1.contains("7") && !m_operand1.contains("8") && !m_operand1.contains("9")){
+                        labelDown.text = "Error"
+                        m_operand1 = "0"
+                        m_operand2 = "0"
+                        labelMid.text = ""
+                        labelUp.text = ""
+                        return
+                    }
                     
                     // statement is called if operands contains decimal values
                     if(m_operand1.contains(".") || m_operand2.contains(".")){
