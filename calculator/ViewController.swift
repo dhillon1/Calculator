@@ -3,7 +3,7 @@
  * Project: Calculator
  * Name: Simranjeet Singh Dhillon
  * StudentID: 301093914
- * Version: V17 - Alpha version
+ * Version: V18 - Beta version
  */
 
 
@@ -1344,6 +1344,7 @@ class ViewController: UIViewController {
         return -1
     }
     
+    //Function check for the length of input data
     func Length(label : String) -> Int {
         var labelLength = 0
         for cha in label {
