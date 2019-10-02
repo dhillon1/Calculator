@@ -3,7 +3,7 @@
  * Project: Calculator
  * Name: Simranjeet Singh Dhillon
  * StudentID: 301093914
- * Version: V14 - Bug with 0 % 0 resolved
+ * Version: V15 - Autoshrink UILabel
  */
 
 
@@ -30,12 +30,14 @@ class ViewController: UIViewController {
     private var m_output_double = 0.0
     private var m_position = 0
     private var m_point = 0
+    private var m_length = 0
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         labelUp.text = ""
+        labelMid.text = ""
         labelDown.text = "0"
         
     }
@@ -54,7 +56,6 @@ class ViewController: UIViewController {
             
         //case for "." button
         case ".":
-            
             //called when label has some input
             if(!m_operand1.contains(".")){
                 m_operand1 += calculatorButton!
@@ -103,6 +104,7 @@ class ViewController: UIViewController {
                         m_input1_double = Double (m_operand1)!
                         m_input2_double = Double (m_operand2)!
                         labelUp.text = String(format: "%.\(m_position)f",m_input2_double + m_input1_double)
+                           
                     }
                         
                     else{
@@ -158,6 +160,8 @@ class ViewController: UIViewController {
                         m_input1_double = Double (m_operand1)!
                         m_input2_double = Double (m_operand2)!
                         labelUp.text = String(format: "%.\(m_position)f",m_input2_double * m_input1_double)
+                            
+                    
                     }
                     else{
                         // this statement is executed if operands does not have decimal values.
@@ -195,6 +199,7 @@ class ViewController: UIViewController {
                     m_operand2 = labelUp.text!
                     m_operand1 = "0"
                     labelDown.text = ""
+                    
                     break
                     
                     
@@ -258,6 +263,7 @@ class ViewController: UIViewController {
              the use case of nested switch statement helps in executing the operator stored in variable m_operator
              */
         case"=":
+            
             if(labelDown.text != ""){
                 
                 if(labelDown.text == "Error"){
@@ -401,6 +407,7 @@ class ViewController: UIViewController {
             m_operand2 = "0"
             m_operand1 = labelDown.text!
             break
+            
             
             
             
@@ -1214,15 +1221,30 @@ class ViewController: UIViewController {
             
         //This statement is called when the number buttons 0,1,2,3,4,5,6,7,8 and 9 is clicked. Then statement is executed.
         default:
-            if(m_operand1 == "0"){
-                m_operand1 = calculatorButton!
+            if(!labelDown.text!.contains(".")){
+            m_length = Length(label: labelDown.text!)
+            if(m_length < 12){
+                if(m_operand1 == "0"){
+                    m_operand1 = calculatorButton!
+                }
+                else{
+                    m_operand1 += calculatorButton!
+                }
+                labelDown.text  = m_operand1
+            
+                }
+                
             }
             else{
-                m_operand1 += calculatorButton! }
-            
-            labelDown.text  = m_operand1
-            
-            
+                if(m_operand1 == "0"){
+                    m_operand1 = calculatorButton!
+                }
+                else{
+                    m_operand1 += calculatorButton!
+                }
+                labelDown.text  = m_operand1
+                
+            }
         }
         
     }
@@ -1319,6 +1341,19 @@ class ViewController: UIViewController {
             return label.count - dot1_positionFromFront
         }
         return -1
+    }
+    
+    func Length(label : String) -> Int {
+        var labelLength = 0
+        for cha in label {
+            labelLength += 1
+            if( cha == "."){
+                return labelLength
+            }
+            
+        }
+        
+        return labelLength
     }
     
     
