@@ -3,7 +3,7 @@
  * Project: Calculator
  * Name: Simranjeet Singh Dhillon
  * StudentID: 301093914
- * Version: V15 - Autoshrink UILabel
+ * Version: V16 - Out of bound issue resolved
  */
 
 
@@ -22,8 +22,8 @@ class ViewController: UIViewController {
     private var m_operand1 = "0"
     private var m_operand2 = "0"
     private var m_operator = ""
-    private var m_input1_int: Int64 = 0
-    private var m_input2_int: Int64 = 0
+    private var m_input1_int: Double = 0.0
+    private var m_input2_int: Double = 0.0
     private var m_output_int = 0
     private var m_input1_double = 0.0
     private var m_input2_double = 0.0
@@ -110,9 +110,9 @@ class ViewController: UIViewController {
                     else{
                         
                         // this statement is executed if operands does not have decimal values.
-                        m_input1_int = Int64 (m_operand1)!
-                        m_input2_int = Int64 (m_operand2)!
-                        labelUp.text = String(m_input2_int + m_input1_int)
+                        m_input1_int = Double (m_operand1)!
+                        m_input2_int = Double (m_operand2)!
+                        labelUp.text = String(format: "%.0f",m_input2_int + m_input1_int)
                     }
                     
                     //UI is updated
@@ -137,9 +137,9 @@ class ViewController: UIViewController {
                         
                     else{
                         // this statement is executed if operands does not have decimal values.
-                        m_input1_int = Int64 (m_operand1)!
-                        m_input2_int = Int64 (m_operand2)!
-                        labelUp.text = String(m_input2_int - m_input1_int)
+                        m_input1_int = Double (m_operand1)!
+                        m_input2_int = Double (m_operand2)!
+                        labelUp.text = String(format: "%.0f",m_input2_int - m_input1_int)
                     }
                     
                     //UI is updated
@@ -165,9 +165,9 @@ class ViewController: UIViewController {
                     }
                     else{
                         // this statement is executed if operands does not have decimal values.
-                        m_input1_int = Int64 (m_operand1)!
-                        m_input2_int = Int64 (m_operand2)!
-                        labelUp.text = String(m_input2_int * m_input1_int)
+                        m_input1_int = Double (m_operand1)!
+                        m_input2_int = Double (m_operand2)!
+                        labelUp.text = String(format: "%.0f",m_input2_int * m_input1_int)
                     }
                     
                     //UI is updated
@@ -224,12 +224,12 @@ class ViewController: UIViewController {
                         // This function gives the Integer value for decimal places to round off.
                         m_input1_double = Double (m_operand1)!
                         m_input2_double = Double (m_operand2)!
-                        labelUp.text = String(format: "%.3f", (m_input2_double.truncatingRemainder(dividingBy:m_input1_double)))
+                        labelUp.text = String(format: "%.3f", m_input2_double.truncatingRemainder(dividingBy:m_input1_double))
                     }else{
                         // this statement is executed if operands does not have decimal values.
-                        m_input1_int = Int64 (m_operand1)!
-                        m_input2_int = Int64 (m_operand2)!
-                        labelUp.text = String(m_input2_int % m_input1_int)
+                        m_input1_int = Double (m_operand1)!
+                        m_input2_int = Double (m_operand2)!
+                        labelUp.text = String(format: "%.0f",m_input2_int.truncatingRemainder(dividingBy:m_input1_int))
                         
                     }
                     
@@ -290,9 +290,9 @@ class ViewController: UIViewController {
                     }else{
                         
                         // this statement is executed if operands does not have decimal values.
-                        m_input1_int = Int64 (m_operand1)!
-                        m_input2_int = Int64 (m_operand2)!
-                        labelDown.text = String(m_input2_int + m_input1_int)
+                        m_input1_int = Double (m_operand1)!
+                        m_input2_int = Double (m_operand2)!
+                        labelDown.text = String(format: "%.0f",m_input2_int + m_input1_int)
                     }
                     break
                     
@@ -310,9 +310,9 @@ class ViewController: UIViewController {
                     }else{
                         
                         // this statement is executed if operands does not have decimal values.
-                        m_input1_int = Int64 (m_operand1)!
-                        m_input2_int = Int64 (m_operand2)!
-                        labelDown.text = String(m_input2_int - m_input1_int)
+                        m_input1_int = Double (m_operand1)!
+                        m_input2_int = Double (m_operand2)!
+                        labelDown.text = String(format: "%.0f",m_input2_int - m_input1_int)
                     }
                     
                     break
@@ -331,9 +331,9 @@ class ViewController: UIViewController {
                     }else{
                         
                         // this statement is executed if operands does not have decimal values.
-                        m_input1_int = Int64 (m_operand1)!
-                        m_input2_int = Int64 (m_operand2)!
-                        labelDown.text = String(m_input2_int * m_input1_int)
+                        m_input1_int = Double (m_operand1)!
+                        m_input2_int = Double (m_operand2)!
+                        labelDown.text = String(format: "%.0f",m_input2_int * m_input1_int)
                     }
                     break
                     
@@ -381,9 +381,9 @@ class ViewController: UIViewController {
                     }else{
                         
                         // this statement is executed if operands does not have decimal values.
-                        m_input1_int = Int64 (m_operand1)!
-                        m_input2_int = Int64 (m_operand2)!
-                        labelDown.text = String(m_input2_int % m_input1_int)
+                        m_input1_int = Double (m_operand1)!
+                        m_input2_int = Double (m_operand2)!
+                        labelDown.text = String(format: "%.0f",m_input2_int.truncatingRemainder(dividingBy:m_input1_int))
                     }
                     break
                 default:
@@ -454,9 +454,9 @@ class ViewController: UIViewController {
                     else{
                         
                         // this statement is executed if operands does not have decimal values.
-                        m_input1_int = Int64 (m_operand1)!
-                        m_input2_int = Int64 (m_operand2)!
-                        labelUp.text = String(m_input2_int + m_input1_int)
+                        m_input1_int = Double (m_operand1)!
+                        m_input2_int = Double (m_operand2)!
+                        labelUp.text = String(format: "%.0f",m_input2_int + m_input1_int)
                     }
                     
                     //UI is updated
@@ -481,9 +481,10 @@ class ViewController: UIViewController {
                         
                     else{
                         // this statement is executed if operands does not have decimal values.
-                        m_input1_int = Int64 (m_operand1)!
-                        m_input2_int = Int64 (m_operand2)!
-                        labelUp.text = String(m_input2_int - m_input1_int)
+                        m_input1_int = Double (m_operand1)!
+                        m_input2_int = Double (m_operand2)!
+                        
+                        labelUp.text = String(format: "%.0f",m_input2_int - m_input1_int)
                     }
                     
                     //UI is updated
@@ -507,9 +508,9 @@ class ViewController: UIViewController {
                     }
                     else{
                         // this statement is executed if operands does not have decimal values.
-                        m_input1_int = Int64 (m_operand1)!
-                        m_input2_int = Int64 (m_operand2)!
-                        labelUp.text = String(m_input2_int * m_input1_int)
+                        m_input1_int = Double (m_operand1)!
+                        m_input2_int = Double (m_operand2)!
+                        labelUp.text = String(format: "%.0f",m_input2_int * m_input1_int)
                     }
                     
                     //UI is updated
@@ -571,9 +572,9 @@ class ViewController: UIViewController {
                         labelUp.text = String(format: "%.3f", (m_input2_double.truncatingRemainder(dividingBy:m_input1_double)))
                     }else{
                         // this statement is executed if operands does not have decimal values.
-                        m_input1_int = Int64 (m_operand1)!
-                        m_input2_int = Int64 (m_operand2)!
-                        labelUp.text = String(m_input2_int % m_input1_int)
+                        m_input1_int = Double (m_operand1)!
+                        m_input2_int = Double (m_operand2)!
+                        labelUp.text = String(format: "%.0f",m_input2_int.truncatingRemainder(dividingBy:m_input1_int))
                         
                     }
                     
@@ -644,9 +645,9 @@ class ViewController: UIViewController {
                     else{
                         
                         // this statement is executed if operands does not have decimal values.
-                        m_input1_int = Int64 (m_operand1)!
-                        m_input2_int = Int64 (m_operand2)!
-                        labelUp.text = String(m_input2_int + m_input1_int)
+                        m_input1_int = Double (m_operand1)!
+                        m_input2_int = Double (m_operand2)!
+                        labelUp.text = String(format: "%.0f",m_input2_int + m_input1_int)
                     }
                     
                     //UI is updated
@@ -671,9 +672,9 @@ class ViewController: UIViewController {
                         
                     else{
                         // this statement is executed if operands does not have decimal values.
-                        m_input1_int = Int64 (m_operand1)!
-                        m_input2_int = Int64 (m_operand2)!
-                        labelUp.text = String(m_input2_int - m_input1_int)
+                        m_input1_int = Double (m_operand1)!
+                        m_input2_int = Double (m_operand2)!
+                        labelUp.text = String(format: "%.0f",m_input2_int - m_input1_int)
                     }
                     
                     //UI is updated
@@ -697,9 +698,9 @@ class ViewController: UIViewController {
                     }
                     else{
                         // this statement is executed if operands does not have decimal values.
-                        m_input1_int = Int64 (m_operand1)!
-                        m_input2_int = Int64 (m_operand2)!
-                        labelUp.text = String(m_input2_int * m_input1_int)
+                        m_input1_int = Double (m_operand1)!
+                        m_input2_int = Double (m_operand2)!
+                        labelUp.text = String(format: "%.0f",m_input2_int * m_input1_int)
                     }
                     
                     //UI is updated
@@ -761,9 +762,9 @@ class ViewController: UIViewController {
                         labelUp.text = String(format: "%.3f", (m_input2_double.truncatingRemainder(dividingBy:m_input1_double)))
                     }else{
                         // this statement is executed if operands does not have decimal values.
-                        m_input1_int = Int64 (m_operand1)!
-                        m_input2_int = Int64 (m_operand2)!
-                        labelUp.text = String(m_input2_int % m_input1_int)
+                        m_input1_int = Double (m_operand1)!
+                        m_input2_int = Double (m_operand2)!
+                        labelUp.text = String(format: "%.0f",m_input2_int.truncatingRemainder(dividingBy:m_input1_int))
                         
                     }
                     
@@ -831,9 +832,9 @@ class ViewController: UIViewController {
                     else{
                         
                         // this statement is executed if operands does not have decimal values.
-                        m_input1_int = Int64 (m_operand1)!
-                        m_input2_int = Int64 (m_operand2)!
-                        labelUp.text = String(m_input2_int + m_input1_int)
+                        m_input1_int = Double (m_operand1)!
+                        m_input2_int = Double (m_operand2)!
+                        labelUp.text = String(format: "%.0f",m_input2_int + m_input1_int)
                     }
                     
                     //UI is updated
@@ -858,9 +859,9 @@ class ViewController: UIViewController {
                         
                     else{
                         // this statement is executed if operands does not have decimal values.
-                        m_input1_int = Int64 (m_operand1)!
-                        m_input2_int = Int64 (m_operand2)!
-                        labelUp.text = String(m_input2_int - m_input1_int)
+                        m_input1_int = Double (m_operand1)!
+                        m_input2_int = Double (m_operand2)!
+                        labelUp.text = String(format: "%.0f",m_input2_int - m_input1_int)
                     }
                     
                     //UI is updated
@@ -884,9 +885,9 @@ class ViewController: UIViewController {
                     }
                     else{
                         // this statement is executed if operands does not have decimal values.
-                        m_input1_int = Int64 (m_operand1)!
-                        m_input2_int = Int64 (m_operand2)!
-                        labelUp.text = String(m_input2_int * m_input1_int)
+                        m_input1_int = Double (m_operand1)!
+                        m_input2_int = Double (m_operand2)!
+                        labelUp.text = String(format: "%.0f",m_input2_int * m_input1_int)
                     }
                     
                     //UI is updated
@@ -947,9 +948,9 @@ class ViewController: UIViewController {
                         labelUp.text = String(format: "%.3f", (m_input2_double.truncatingRemainder(dividingBy:m_input1_double)))
                     }else{
                         // this statement is executed if operands does not have decimal values.
-                        m_input1_int = Int64 (m_operand1)!
-                        m_input2_int = Int64 (m_operand2)!
-                        labelUp.text = String(m_input2_int % m_input1_int)
+                        m_input1_int = Double (m_operand1)!
+                        m_input2_int = Double (m_operand2)!
+                        labelUp.text = String(format: "%.0f",m_input2_int.truncatingRemainder(dividingBy:m_input1_int))
                         
                     }
                     
@@ -1013,9 +1014,9 @@ class ViewController: UIViewController {
                     else{
                         
                         // this statement is executed if operands does not have decimal values.
-                        m_input1_int = Int64 (m_operand1)!
-                        m_input2_int = Int64 (m_operand2)!
-                        labelUp.text = String(m_input2_int + m_input1_int)
+                        m_input1_int = Double (m_operand1)!
+                        m_input2_int = Double (m_operand2)!
+                        labelUp.text = String(format: "%.0f",m_input2_int + m_input1_int)
                     }
                     
                     //UI is updated
@@ -1040,9 +1041,9 @@ class ViewController: UIViewController {
                         
                     else{
                         // this statement is executed if operands does not have decimal values.
-                        m_input1_int = Int64 (m_operand1)!
-                        m_input2_int = Int64 (m_operand2)!
-                        labelUp.text = String(m_input2_int - m_input1_int)
+                        m_input1_int = Double (m_operand1)!
+                        m_input2_int = Double (m_operand2)!
+                        labelUp.text = String(format: "%.0f",m_input2_int - m_input1_int)
                     }
                     
                     //UI is updated
@@ -1066,9 +1067,9 @@ class ViewController: UIViewController {
                     }
                     else{
                         // this statement is executed if operands does not have decimal values.
-                        m_input1_int = Int64 (m_operand1)!
-                        m_input2_int = Int64 (m_operand2)!
-                        labelUp.text = String(m_input2_int * m_input1_int)
+                        m_input1_int = Double (m_operand1)!
+                        m_input2_int = Double (m_operand2)!
+                        labelUp.text = String(format: "%.0f",m_input2_int * m_input1_int)
                     }
                     
                     //UI is updated
@@ -1130,9 +1131,9 @@ class ViewController: UIViewController {
                         labelUp.text = String(format: "%.3f", (m_input2_double.truncatingRemainder(dividingBy:m_input1_double)))
                     }else{
                         // this statement is executed if operands does not have decimal values.
-                        m_input1_int = Int64 (m_operand1)!
-                        m_input2_int = Int64 (m_operand2)!
-                        labelUp.text = String(m_input2_int % m_input1_int)
+                        m_input1_int = Double (m_operand1)!
+                        m_input2_int = Double (m_operand2)!
+                        labelUp.text = String(format: "%.0f",m_input2_int.truncatingRemainder(dividingBy:m_input1_int))
                         
                     }
                     
