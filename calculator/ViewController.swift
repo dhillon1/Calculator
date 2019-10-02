@@ -3,7 +3,7 @@
  * Project: Calculator
  * Name: Simranjeet Singh Dhillon
  * StudentID: 301093914
- * Version: V13 - 0 ÷ 0 was giving error. Now working fine
+ * Version: V14 - Bug with 0 % 0 resolved
  */
 
 
@@ -77,6 +77,10 @@ class ViewController: UIViewController {
              */
         case "+":
             if(labelDown.text != ""){
+                
+                if(labelDown.text == "Error"){
+                    return
+                }
                 
                 //function LabelDownPoint helps to check if the value of input is "9." and then we click operator button
                 // so in conditions like these value should be converted to "9"
@@ -175,6 +179,7 @@ class ViewController: UIViewController {
                         labelDown.text = "Error"
                         m_operand1 = "0"
                         m_operand2 = "0"
+                        m_operator = "0"
                         labelMid.text = ""
                         labelUp.text = ""
                         return
@@ -201,6 +206,7 @@ class ViewController: UIViewController {
                         labelDown.text = "Error"
                         m_operand1 = "0"
                         m_operand2 = "0"
+                        m_operator = "0"
                         labelMid.text = ""
                         labelUp.text = ""
                         return
@@ -253,6 +259,11 @@ class ViewController: UIViewController {
              */
         case"=":
             if(labelDown.text != ""){
+                
+                if(labelDown.text == "Error"){
+                    return
+                }
+                
                 m_point = LabelDownPoint(label: m_operand1)
                 if(m_point == 0){
                     m_operand1 = String(m_operand1.dropLast())
@@ -328,6 +339,7 @@ class ViewController: UIViewController {
                         labelDown.text = "Error"
                         m_operand1 = "0"
                         m_operand2 = "0"
+                        m_operator = "0"
                         labelMid.text = ""
                         labelUp.text = ""
                         return
@@ -347,6 +359,7 @@ class ViewController: UIViewController {
                         labelDown.text = "Error"
                         m_operand1 = "0"
                         m_operand2 = "0"
+                        m_operator = "0"
                         labelMid.text = ""
                         labelUp.text = ""
                         return
@@ -402,6 +415,10 @@ class ViewController: UIViewController {
         case "-":
             
             if(labelDown.text != ""){
+                
+                if(labelDown.text == "Error"){
+                    return
+                }
                 
                 //function LabelDownPoint helps to check if the value of input is "9." and then we click operator button
                 // so in conditions like these value should be converted to "9"
@@ -502,6 +519,7 @@ class ViewController: UIViewController {
                         labelDown.text = "Error"
                         m_operand1 = "0"
                         m_operand2 = "0"
+                        m_operator = "0"
                         labelMid.text = ""
                         labelUp.text = ""
                         return
@@ -529,6 +547,7 @@ class ViewController: UIViewController {
                         labelDown.text = "Error"
                         m_operand1 = "0"
                         m_operand2 = "0"
+                        m_operator = "0"
                         labelMid.text = ""
                         labelUp.text = ""
                         return
@@ -587,6 +606,10 @@ class ViewController: UIViewController {
             
             if(labelDown.text != ""){
                 
+                if(labelDown.text == "Error"){
+                    return
+                }
+                
                 //function LabelDownPoint helps to check if the value of input is "9." and then we click operator button
                 // so in conditions like these value should be converted to "9"
                 m_point = LabelDownPoint(label: m_operand1)
@@ -686,6 +709,7 @@ class ViewController: UIViewController {
                         labelDown.text = "Error"
                         m_operand1 = "0"
                         m_operand2 = "0"
+                        m_operator = "0"
                         labelMid.text = ""
                         labelUp.text = ""
                         return
@@ -713,6 +737,7 @@ class ViewController: UIViewController {
                         labelDown.text = "Error"
                         m_operand1 = "0"
                         m_operand2 = "0"
+                        m_operator = "0"
                         labelMid.text = ""
                         labelUp.text = ""
                         return
@@ -768,6 +793,10 @@ class ViewController: UIViewController {
         case "÷":
             if(labelDown.text != ""){
                 
+                if(labelDown.text == "Error"){
+                    return
+                }
+                
                 //function LabelDownPoint helps to check if the value of input is "9." and then we click operator button
                 // so in conditions like these value should be converted to "9"
                 m_point = LabelDownPoint(label: m_operand1)
@@ -867,6 +896,7 @@ class ViewController: UIViewController {
                         labelDown.text = "Error"
                         m_operand1 = "0"
                         m_operand2 = "0"
+                        m_operator = "0"
                         labelMid.text = ""
                         labelUp.text = ""
                         return
@@ -893,6 +923,7 @@ class ViewController: UIViewController {
                         labelDown.text = "Error"
                         m_operand1 = "0"
                         m_operand2 = "0"
+                        m_operator = "0"
                         labelMid.text = ""
                         labelUp.text = ""
                         return
@@ -943,6 +974,10 @@ class ViewController: UIViewController {
             
         case "%":
             if(labelDown.text != ""){
+                
+                if(labelDown.text == "Error"){
+                    return
+                }
                 
                 //function LabelDownPoint helps to check if the value of input is "9." and then we click operator button
                 // so in conditions like these value should be converted to "9".
@@ -1043,6 +1078,7 @@ class ViewController: UIViewController {
                         labelDown.text = "Error"
                         m_operand1 = "0"
                         m_operand2 = "0"
+                        m_operator = "0"
                         labelMid.text = ""
                         labelUp.text = ""
                         return
@@ -1070,6 +1106,7 @@ class ViewController: UIViewController {
                         labelDown.text = "Error"
                         m_operand1 = "0"
                         m_operand2 = "0"
+                        m_operator = "0"
                         labelMid.text = ""
                         labelUp.text = ""
                         return
@@ -1111,6 +1148,11 @@ class ViewController: UIViewController {
             
         // This statement is called to clear the last digit of operand and show the new operand.
         case"C":
+            
+            if(labelDown.text == "Error"){
+                labelDown.text = "0"
+                return
+            }
             
             //This statement tells if the operand have negative integer than execute and drop the last digit.
             if(labelDown.text!.contains("-")){
